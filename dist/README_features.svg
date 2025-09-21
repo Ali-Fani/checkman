@@ -1,0 +1,60 @@
+# Checkman Features SVG
+
+This SVG image represents the key features and design elements of the Checkman (مدیریت چک) application.
+
+## Features Represented
+
+### Core Functionality
+- **Check Management**: Central checkmark icon representing the core check/checkmark functionality
+- **Check Lists**: Visual representation of check items with Persian labels
+- **Due Date Tracking**: Integration with Persian calendar system
+
+### Technical Features
+- **Persian Calendar**: Custom calendar widget showing Persian dates (۱۴۰۳/۰۶/۳۰) with Gregorian conversion
+- **Notifications**: Bell icon with badge showing reminder system
+- **Theme Toggle**: Sun/moon switch representing dark/light mode functionality
+- **PWA Support**: Mobile phone interface showing app-like functionality
+- **Offline Support**: Indicated through the PWA mobile interface
+
+### Design Elements
+- **Persian Color Palette**: Blue (#2563eb), Green (#059669), and Orange (#ea580c) gradients
+- **Glassmorphism Effects**: Modern frosted glass appearance with backdrop blur
+- **RTL Support**: Right-to-left layout for Persian text
+- **Modern UI**: Gradients, shadows, and smooth animations
+- **Responsive Design**: Mobile-first approach with adaptive layouts
+
+### Visual Components
+- **Central Check Icon**: Large animated checkmark in the center
+- **Feature Grid**: Four main feature cards (Calendar, Notifications, Theme, PWA)
+- **Check List Preview**: Sample check items with Persian labels
+- **Decorative Elements**: Floating particles and gradient overlays
+- **Typography**: Persian title "مدیریت چک" with English subtitle
+
+## Technical Details
+- **Dimensions**: 800x600 viewBox
+- **Format**: Scalable SVG with modern features
+- **Gradients**: CSS3 linear gradients for smooth color transitions
+- **Filters**: Glassmorphism, drop shadows, and glow effects
+- **Accessibility**: Proper contrast and semantic structure
+
+## Usage
+This SVG can be used for:
+- Project presentations
+- Documentation headers
+- Marketing materials
+- App store listings
+- Website headers
+- README files
+
+## Colors Used
+- Primary Blue: #2563eb → #3b82f6
+- Success Green: #059669 → #10b981
+- Warning Orange: #ea580c → #f97316
+- Neutral Gray: #6b7280
+- Background: rgba(255,255,255,0.95) with glassmorphism
+
+## Persian Text Elements
+- Main Title: "مدیریت چک" (Check Management)
+- Sample Checks: "چک اول", "چک دوم" (Check 1, Check 2)
+- Calendar Date: "۱۴۰۳/۰۶/۳۰" (Persian date format)
+- Feature Labels: "چک‌های پیش رو" (Upcoming Checks)

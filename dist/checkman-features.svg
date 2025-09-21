@@ -1,0 +1,166 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Persian Color Gradients -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="warmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ea580c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glassmorphism Filters -->
+    <filter id="glassmorphism" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.1 0"/>
+    </filter>
+
+    <!-- Drop Shadow -->
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+
+    <!-- Glow Effects -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#primaryGradient)" opacity="0.05"/>
+
+  <!-- Main Container -->
+  <rect x="50" y="50" width="700" height="500" rx="20" ry="20" fill="rgba(255,255,255,0.95)" filter="url(#glassmorphism)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="400" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="url(#primaryGradient)">
+    مدیریت چک
+  </text>
+  <text x="400" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#6b7280">
+    Check Manager Features
+  </text>
+
+  <!-- Central Check Icon -->
+  <g transform="translate(400, 200)">
+    <!-- Check Circle Background -->
+    <circle cx="0" cy="0" r="60" fill="url(#accentGradient)" filter="url(#dropShadow)"/>
+    <!-- Check Mark -->
+    <path d="M -25,-10 L -10,15 L 25,-25" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)"/>
+  </g>
+
+  <!-- Feature Grid -->
+  <g id="featureGrid">
+    <!-- Top Row -->
+    <!-- Persian Calendar -->
+    <g transform="translate(150, 180)">
+      <rect x="0" y="0" width="100" height="80" rx="12" fill="rgba(255,255,255,0.9)" filter="url(#dropShadow)" stroke="rgba(37,99,235,0.2)" stroke-width="2"/>
+      <!-- Calendar Icon -->
+      <rect x="15" y="15" width="30" height="25" rx="3" fill="url(#primaryGradient)"/>
+      <rect x="50" y="15" width="35" height="5" rx="2" fill="#3b82f6" opacity="0.7"/>
+      <rect x="50" y="25" width="35" height="5" rx="2" fill="#3b82f6" opacity="0.7"/>
+      <rect x="50" y="35" width="25" height="5" rx="2" fill="#3b82f6" opacity="0.7"/>
+      <!-- Persian Date -->
+      <text x="50" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">۱۴۰۳/۰۶/۳۰</text>
+      <text x="50" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6b7280">Sep 21, 2025</text>
+    </g>
+
+    <!-- Notifications -->
+    <g transform="translate(550, 180)">
+      <rect x="0" y="0" width="100" height="80" rx="12" fill="rgba(255,255,255,0.9)" filter="url(#dropShadow)" stroke="rgba(16,185,129,0.2)" stroke-width="2"/>
+      <!-- Bell Icon -->
+      <path d="M 25,20 Q 25,10 35,10 Q 45,10 45,20" stroke="url(#accentGradient)" stroke-width="3" fill="none"/>
+      <path d="M 30,20 L 30,35 Q 30,40 35,40 Q 40,40 40,35 L 40,20" fill="url(#accentGradient)"/>
+      <circle cx="35" cy="40" r="8" fill="url(#accentGradient)"/>
+      <!-- Notification Badge -->
+      <circle cx="55" cy="15" r="8" fill="url(#warmGradient)"/>
+      <text x="55" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">۳</text>
+      <text x="50" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#059669">Reminders</text>
+    </g>
+
+    <!-- Bottom Row -->
+    <!-- Theme Toggle -->
+    <g transform="translate(150, 320)">
+      <rect x="0" y="0" width="100" height="80" rx="12" fill="rgba(255,255,255,0.9)" filter="url(#dropShadow)" stroke="rgba(107,114,128,0.2)" stroke-width="2"/>
+      <!-- Sun/Moon Toggle -->
+      <circle cx="30" cy="40" r="15" fill="url(#warmGradient)"/>
+      <path d="M 25,35 L 35,35 M 30,30 L 30,40 M 26,31 L 34,39 M 34,31 L 26,39" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <!-- Moon -->
+      <circle cx="70" cy="40" r="15" fill="#3b82f6" opacity="0.8"/>
+      <circle cx="72" cy="38" r="12" fill="rgba(255,255,255,0.9)"/>
+      <text x="50" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6b7280">Dark/Light</text>
+    </g>
+
+    <!-- PWA & Mobile -->
+    <g transform="translate(550, 320)">
+      <rect x="0" y="0" width="100" height="80" rx="12" fill="rgba(255,255,255,0.9)" filter="url(#dropShadow)" stroke="rgba(37,99,235,0.2)" stroke-width="2"/>
+      <!-- Phone Frame -->
+      <rect x="15" y="10" width="40" height="60" rx="8" fill="#1f2937" stroke="#374151" stroke-width="2"/>
+      <rect x="18" y="13" width="34" height="54" rx="5" fill="url(#primaryGradient)"/>
+      <!-- App Interface -->
+      <rect x="22" y="18" width="26" height="3" rx="1" fill="rgba(255,255,255,0.3)"/>
+      <rect x="22" y="24" width="20" height="3" rx="1" fill="rgba(255,255,255,0.3)"/>
+      <rect x="22" y="30" width="15" height="3" rx="1" fill="rgba(255,255,255,0.3)"/>
+      <!-- PWA Icon -->
+      <rect x="35" y="40" width="12" height="12" rx="2" fill="url(#accentGradient)"/>
+      <circle cx="41" cy="46" r="3" fill="white"/>
+      <text x="50" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#2563eb">PWA</text>
+    </g>
+  </g>
+
+  <!-- Check List Representation -->
+  <g transform="translate(400, 420)">
+    <rect x="-150" y="0" width="300" height="60" rx="12" fill="rgba(255,255,255,0.9)" filter="url(#dropShadow)" stroke="rgba(37,99,235,0.1)" stroke-width="1"/>
+
+    <!-- Check Items -->
+    <g id="checkItems">
+      <!-- Check 1 -->
+      <g transform="translate(-120, 15)">
+        <rect x="0" y="0" width="20" height="20" rx="4" fill="url(#accentGradient)"/>
+        <path d="M 5,10 L 9,15 L 15,5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <text x="30" y="15" font-family="Arial, sans-serif" font-size="12" fill="#1f2937">چک اول</text>
+      </g>
+
+      <!-- Check 2 -->
+      <g transform="translate(-120, 35)">
+        <rect x="0" y="0" width="20" height="20" rx="4" fill="url(#warmGradient)"/>
+        <path d="M 5,10 L 9,15 L 15,5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <text x="30" y="15" font-family="Arial, sans-serif" font-size="12" fill="#1f2937">چک دوم</text>
+      </g>
+
+      <!-- Upcoming Count -->
+      <g transform="translate(80, 25)">
+        <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">چک‌های پیش رو</text>
+        <text x="0" y="12" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="url(#primaryGradient)">۵</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Decorative Elements -->
+  <!-- Floating Particles -->
+  <g opacity="0.3">
+    <circle cx="100" cy="150" r="3" fill="url(#primaryGradient)"/>
+    <circle cx="700" cy="200" r="2" fill="url(#accentGradient)"/>
+    <circle cx="150" cy="450" r="4" fill="url(#warmGradient)"/>
+    <circle cx="650" cy="100" r="2" fill="url(#primaryGradient)"/>
+  </g>
+
+  <!-- Gradient Overlays -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#primaryGradient)" opacity="0.02"/>
+
+  <!-- Bottom Text -->
+  <text x="400" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+    Persian Check Management Application
+  </text>
+  <text x="400" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#9ca3af">
+    PWA • Offline Support • Persian Calendar • Dark Mode • Notifications
+  </text>
+</svg>
