@@ -23,40 +23,85 @@ export default defineConfig({
           }
         ]
       },
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      includeAssets: ['favicon.svg', 'icon-*.svg', 'checkman-features.svg'],
       manifest: {
         name: 'چک من',
         short_name: 'چک من',
-        description: 'Client-side check management application',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        description: 'برنامه مدیریت چک با قابلیت‌های پیشرفته - Advanced check management application',
+        theme_color: '#2563eb',
+        background_color: '#2563eb',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
         start_url: '/',
+        lang: 'fa',
+        dir: 'rtl',
+        categories: ['finance', 'productivity', 'business'],
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'icon-96.svg',
+            sizes: '96x96',
+            type: 'image/svg+xml',
+            purpose: 'any'
+          },
+          {
+            src: 'icon-128.svg',
+            sizes: '128x128',
+            type: 'image/svg+xml',
+            purpose: 'any'
+          },
+          {
+            src: 'icon-192.svg',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/svg+xml',
+            purpose: 'any'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'icon-512.svg',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/svg+xml',
+            purpose: 'any'
           },
           {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
+            src: 'icon-96.svg',
+            sizes: '96x96',
+            type: 'image/svg+xml',
             purpose: 'any maskable'
+          },
+          {
+            src: 'icon-192.svg',
+            sizes: '192x192',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
+          },
+          {
+            src: 'icon-512.svg',
+            sizes: '512x512',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
+          }
+        ],
+        shortcuts: [
+          {
+            name: 'چک جدید',
+            short_name: 'چک جدید',
+            description: 'افزودن چک جدید',
+            url: '/?action=new',
+            icons: [{ src: 'icon-96.svg', sizes: '96x96', type: 'image/svg+xml' }]
+          },
+          {
+            name: 'چک‌های پیش رو',
+            short_name: 'پیش رو',
+            description: 'مشاهده چک‌های پیش رو',
+            url: '/?tab=upcoming',
+            icons: [{ src: 'icon-96.svg', sizes: '96x96', type: 'image/svg+xml' }]
           }
         ]
       }
     })
   ],
   root: '.',
-  base: './',
+  base: '/',
   build: {
     outDir: 'dist',
     rollupOptions: {
