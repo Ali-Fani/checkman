@@ -25,8 +25,8 @@ export default defineConfig({
       },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'مدیریت چک',
-        short_name: 'مدیریت چک',
+        name: 'چک من',
+        short_name: 'چک من',
         description: 'Client-side check management application',
         theme_color: '#ffffff',
         background_color: '#ffffff',
