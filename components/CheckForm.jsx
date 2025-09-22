@@ -5,6 +5,7 @@ import DateObject from "react-date-object";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { isCheckNumberUnique, generateUniqueCheckNumber } from '../utils/storage.js';
+import { useContactPicker } from '../utils/useContactPicker.js';
 import Button from './Button.jsx';
 import { useTheme } from '../utils/theme.jsx';
 
@@ -20,18 +21,19 @@ function gregorianToPersian(gregorianDate) {
 
 
 function CheckForm({ onSubmit, editingCheck, onCancel, existingChecks }) {
-    const { theme } = useTheme();
-    const [isCollapsed, setIsCollapsed] = useState(true);
-    const [formData, setFormData] = useState({
-        type: 'Given',
-        amount: '',
-        dueDate: '',
-        receiveDate: '',
-        counterparty: '',
-        bank: '',
-        checkNumber: ''
-    });
-    const [errors, setErrors] = useState({});
+     const { theme } = useTheme();
+     const [isCollapsed, setIsCollapsed] = useState(true);
+     const { isSupported, isLoading, error: contactError, pickContact, clearError } = useContactPicker();
+     const [formData, setFormData] = useState({
+         type: 'Given',
+         amount: '',
+         dueDate: '',
+         receiveDate: '',
+         counterparty: '',
+         bank: '',
+         checkNumber: ''
+     });
+     const [errors, setErrors] = useState({});
 
     // Inject custom CSS for react-multi-date-picker input
     useEffect(() => {
@@ -169,6 +171,23 @@ function CheckForm({ onSubmit, editingCheck, onCancel, existingChecks }) {
                 ...prev,
                 [name]: ''
             }));
+        }
+    };
+
+    const handleContactSelect = async () => {
+        const contact = await pickContact();
+        if (contact && contact.name) {
+            setFormData(prev => ({
+                ...prev,
+                counterparty: contact.name
+            }));
+            // Clear any existing errors
+            if (errors.counterparty) {
+                setErrors(prev => ({
+                    ...prev,
+                    counterparty: ''
+                }));
+            }
         }
     };
 
@@ -371,15 +390,67 @@ function CheckForm({ onSubmit, editingCheck, onCancel, existingChecks }) {
 
             <motion.div className="form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <label htmlFor="counterparty">طرف حساب:</label>
-                <input
-                    type="text"
-                    id="counterparty"
-                    name="counterparty"
-                    value={formData.counterparty}
-                    onChange={handleChange}
-                />
+                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <input
+                        type="text"
+                        id="counterparty"
+                        name="counterparty"
+                        value={formData.counterparty}
+                        onChange={handleChange}
+                        style={{ paddingRight: '50px' }}
+                    />
+                    {isSupported && (
+                        <button
+                            type="button"
+                            onClick={handleContactSelect}
+                            disabled={isLoading}
+                            style={{
+                                position: 'absolute',
+                                right: '8px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                background: 'none',
+                                border: 'none',
+                                cursor: isLoading ? 'not-allowed' : 'pointer',
+                                padding: '4px',
+                                borderRadius: '4px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                transition: 'background-color 0.2s',
+                                color: theme === 'dark' ? '#64748b' : '#475569'
+                            }}
+                            title="انتخاب از مخاطبین"
+                        >
+                            {isLoading ? (
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" opacity="0.5">
+                                        <animate attributeName="stroke-dasharray" dur="2s" values="0 20;10 20;0 20" repeatCount="indefinite" />
+                                        <animate attributeName="stroke-dashoffset" dur="2s" values="0;-10;-20" repeatCount="indefinite" />
+                                    </circle>
+                                </svg>
+                            ) : (
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            )}
+                        </button>
+                    )}
+                </div>
+                {contactError && <div className="error" style={{ marginTop: '4px' }}>{contactError}</div>}
                 {errors.counterparty && <div className="error">{errors.counterparty}</div>}
-                {!errors.counterparty && formData.counterparty.trim() && <div className="success">طرف حساب انتخاب شد</div>}
+                {!errors.counterparty && !contactError && formData.counterparty.trim() && <div className="success">طرف حساب انتخاب شد</div>}
+                {!isSupported && (
+                    <div style={{
+                        marginTop: '4px',
+                        fontSize: '12px',
+                        color: 'var(--text-muted)',
+                        fontStyle: 'italic'
+                    }}>
+                        انتخاب از مخاطبین در این مرورگر پشتیبانی نمی‌شود
+                    </div>
+                )}
             </motion.div>
 
             <motion.div className="form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
