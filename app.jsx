@@ -104,7 +104,7 @@ function App() {
             />
             <footer className="app-footer">
                 <div className="version-info">
-                    نسخه ۱.۰.۰ - مدیریت چک
+                    نسخه ۱.۱.۰ - مدیریت چک
                 </div>
             </footer>
 
