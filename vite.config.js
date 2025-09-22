@@ -39,45 +39,27 @@ export default defineConfig({
         categories: ['finance', 'productivity', 'business'],
         icons: [
           {
-            src: 'icon-96.svg',
-            sizes: '96x96',
-            type: 'image/svg+xml',
-            purpose: 'any'
-          },
-          {
-            src: 'icon-128.svg',
-            sizes: '128x128',
-            type: 'image/svg+xml',
-            purpose: 'any'
-          },
-          {
-            src: 'icon-192.svg',
+            src: 'pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any'
           },
           {
-            src: 'icon-512.svg',
+            src: 'pwa-512x512.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any'
           },
           {
-            src: 'icon-96.svg',
-            sizes: '96x96',
-            type: 'image/svg+xml',
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
             purpose: 'any maskable'
           },
           {
-            src: 'icon-192.svg',
-            sizes: '192x192',
-            type: 'image/svg+xml',
-            purpose: 'any maskable'
-          },
-          {
-            src: 'icon-512.svg',
+            src: 'maskable-icon-512x512.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any maskable'
           }
         ],
@@ -87,14 +69,14 @@ export default defineConfig({
             short_name: 'چک جدید',
             description: 'افزودن چک جدید',
             url: '/?action=new',
-            icons: [{ src: 'icon-96.svg', sizes: '96x96', type: 'image/svg+xml' }]
+            icons: [{ src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' }]
           },
           {
             name: 'چک‌های پیش رو',
             short_name: 'پیش رو',
             description: 'مشاهده چک‌های پیش رو',
             url: '/?tab=upcoming',
-            icons: [{ src: 'icon-96.svg', sizes: '96x96', type: 'image/svg+xml' }]
+            icons: [{ src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' }]
           }
         ]
       }
