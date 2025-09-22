@@ -648,6 +648,8 @@ p {
     justify-content: center;
     max-width: 100%;
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .date-inputs-row .form-group {
@@ -663,13 +665,32 @@ p {
         flex-direction: column;
         gap: 16px;
         justify-content: flex-start;
+        position: relative;
+        z-index: 1;
     }
 
     .date-inputs-row .form-group {
         margin-bottom: 16px;
         max-width: 100%;
         min-width: auto;
+        position: relative;
     }
+
+    /* Mobile datepicker fixes */
+
+
+    .rmdp-calendar {
+        position: fixed !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        max-height: 80vh !important;
+        max-width: 90vw !important;
+        overflow-y: auto !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    }
+
+
 }
 
 /* RTL Form Adjustments */
@@ -718,19 +739,16 @@ p {
     border-radius: 8px !important;
     box-shadow: 0 8px 32px var(--shadow-medium) !important;
     color: var(--text-primary) !important;
-    z-index: 1000 !important;
     position: absolute !important;
 }
 
 /* Ensure calendar container doesn't get clipped */
 .rmdp-container {
     position: relative !important;
-    z-index: 999 !important;
 }
 
 /* Fix for datepicker arrows visibility */
 .rmdp-arrow-container {
-    z-index: 1001 !important;
     position: relative !important;
 }
 

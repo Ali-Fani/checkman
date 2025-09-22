@@ -66,6 +66,56 @@ function CheckForm({ onSubmit, editingCheck, onCancel, existingChecks }) {
                 background: ${theme === 'dark' ? '#1e293b' : '#ffffff'} !important;
                 transform: translateY(-1px) !important;
             }
+
+            /* Fix datepicker z-index and positioning */
+            .rmdp-container {
+                position: relative !important;
+                width: 100% !important;
+            }
+
+            .rmdp-calendar {
+                position: absolute !important;
+                z-index: 1001 !important;
+                top: 100% !important;
+                box-shadow: 0 8px 32px ${theme === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(0, 0, 0, 0.15)'} !important;
+                border: 1px solid ${theme === 'dark' ? '#475569' : '#d1d5db'} !important;
+                border-radius: 8px !important;
+                margin-top: 4px !important;
+            }
+
+            .rmdp-arrow-container {
+                z-index: 1002 !important;
+                position: relative !important;
+            }
+
+            /* Mobile specific fixes */
+            @media (max-width: 768px) {
+   
+
+                .rmdp-calendar {
+                    position: fixed !important;
+                    left: 50% !important;
+                    top: 50% !important;
+                    transform: translate(-50%, -50%) !important;
+                    max-height: 80vh !important;
+                    max-width: 90vw !important;
+                    overflow-y: auto !important;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+                }
+
+
+            }
+
+            /* Tablet specific fixes */
+            @media (min-width: 769px) and (max-width: 1024px) {
+
+
+                .rmdp-calendar {
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+                }
+
+
+            }
         `;
 
         styleElement = document.createElement('style');
@@ -99,6 +149,14 @@ function CheckForm({ onSubmit, editingCheck, onCancel, existingChecks }) {
         // Convert Persian digits to Latin digits for amount field
         if (name === 'amount') {
             processedValue = value.replace(/[۰-۹]/g, d => '0123456789'['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]);
+
+            // Remove any decimal places to prevent .97 issues
+            if (processedValue && !isNaN(processedValue)) {
+                const numValue = parseFloat(processedValue);
+                if (numValue % 1 !== 0) {
+                    processedValue = Math.round(numValue).toString();
+                }
+            }
         }
 
         setFormData(prev => ({
@@ -245,14 +303,37 @@ function CheckForm({ onSubmit, editingCheck, onCancel, existingChecks }) {
                     name="amount"
                     value={formData.amount}
                     onChange={handleChange}
-                    step="0.01"
+                    step="1"
                     min="0"
                 />
+                {formData.amount && parseFloat(formData.amount) > 0 && (
+                    <div style={{
+                        marginTop: '8px',
+                        padding: '8px 12px',
+                        backgroundColor: 'var(--background-light)',
+                        borderRadius: '6px',
+                        border: '1px solid var(--border-light)',
+                        fontSize: '14px',
+                        color: 'var(--text-secondary)',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <span>نمایش:</span>
+                        <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>
+                            {new Intl.NumberFormat('fa-IR', {
+                                style: 'currency',
+                                currency: 'IRR'
+                            }).format(parseFloat(formData.amount))}
+                            {formData.type === 'Given' ? ' (پرداختی)' : ' (دریافتی)'}
+                        </span>
+                    </div>
+                )}
                 {errors.amount && <div className="error">{errors.amount}</div>}
                 {!errors.amount && formData.amount && parseFloat(formData.amount) > 0 && <div className="success">مبلغ معتبر است</div>}
             </motion.div>
 
-            <div className="date-inputs-row">
+            <div className="date-inputs-row" style={{ position: 'relative', zIndex: 1 }}>
                 <motion.div className="form-group" variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                     <label>تاریخ سررسید:</label>
                     <DatePicker

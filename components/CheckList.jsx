@@ -58,7 +58,23 @@ function CheckList({ checks, onEdit, onDelete, loading = false }) {
             checksWithBalance.sort((a, b) => b.balance - a.balance);
         }
 
-        return checksWithBalance;
+        // Calculate totals
+        const totals = {
+            given: 0,
+            taken: 0,
+            total: 0
+        };
+
+        checksWithBalance.forEach(check => {
+            if (check.type === 'Given') {
+                totals.given += check.amount;
+            } else if (check.type === 'Taken') {
+                totals.taken += check.amount;
+            }
+            totals.total += check.amount;
+        });
+
+        return { checks: checksWithBalance, totals };
     }, [checks, sortBy, filterType]);
 
     const formatCurrency = (amount) => {
@@ -117,7 +133,7 @@ function CheckList({ checks, onEdit, onDelete, loading = false }) {
                 <div className="check-grid-container">
                     <SkeletonTable rows={5} columns={10} />
                 </div>
-            ) : sortedAndFilteredChecksWithBalance.length === 0 ? (
+            ) : sortedAndFilteredChecksWithBalance.checks.length === 0 ? (
                 <p style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
                     هیچ چکی یافت نشد.
                 </p>
@@ -149,7 +165,7 @@ function CheckList({ checks, onEdit, onDelete, loading = false }) {
     }}
 >
     <AnimatePresence>
-        {sortedAndFilteredChecksWithBalance.map((check, index) => (
+        {sortedAndFilteredChecksWithBalance.checks.map((check, index) => (
             <motion.tr
                 key={check.id}
                 layoutId={check.id}
@@ -162,7 +178,10 @@ function CheckList({ checks, onEdit, onDelete, loading = false }) {
             >
             <td className="row-number">{index + 1}</td>
             <td>{check.type === 'Given' ? 'پرداختی' : 'دریافتی'}</td>
-            <td>{formatCurrency(check.amount)}</td>
+            <td>
+                {formatCurrency(check.amount)}
+                {check.type === 'Given' ? ' (پرداختی)' : ' (دریافتی)'}
+            </td>
             <td>{formatDate(check.dueDate)}</td>
             <td>{formatDate(check.receiveDate)}</td>
             <td>{check.counterparty}</td>
@@ -196,6 +215,39 @@ function CheckList({ checks, onEdit, onDelete, loading = false }) {
             </td>
         </motion.tr>
         ))}
+
+        {/* Total Row */}
+        {sortedAndFilteredChecksWithBalance.checks.length > 0 && (
+            <motion.tr
+                key="totals"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                style={{
+                    backgroundColor: 'var(--background-light)',
+                    fontWeight: 'bold',
+                    borderTop: '2px solid var(--primary-blue)'
+                }}
+            >
+                <td style={{ fontWeight: 'bold', color: 'var(--primary-blue)' }}>جمع کل</td>
+                <td></td>
+                <td>
+                    {formatCurrency(sortedAndFilteredChecksWithBalance.totals.total)}
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td className={getBalanceClass(sortedAndFilteredChecksWithBalance.totals.total - sortedAndFilteredChecksWithBalance.totals.given)}>
+                    {formatCurrency(Math.abs(sortedAndFilteredChecksWithBalance.totals.total - sortedAndFilteredChecksWithBalance.totals.given))}
+                    {sortedAndFilteredChecksWithBalance.totals.total - sortedAndFilteredChecksWithBalance.totals.given > 0 ?
+                        ' (بستانکار)' : sortedAndFilteredChecksWithBalance.totals.total - sortedAndFilteredChecksWithBalance.totals.given < 0 ?
+                        ' (بدهکار)' : ' (متعادل)'}
+                </td>
+                <td></td>
+            </motion.tr>
+        )}
     </AnimatePresence>
 </motion.tbody>
                     </table>
